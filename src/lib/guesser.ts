@@ -1,4 +1,5 @@
 import { chosenStrategy } from './stores';
+import { get } from 'svelte/store';
 
 export type GuessStrategy = {
   name: string;
@@ -24,7 +25,7 @@ export const strategies: Record<string, GuessStrategy> = {
 export type StrategyKey = keyof typeof strategies;
 
 export const guessNumber = (low: number, high: number): number => {
-  const strategyKey: StrategyKey = chosenStrategy.get();
+  const strategyKey: StrategyKey = get(chosenStrategy);
   const strategy = strategies[strategyKey];
   return strategy.guess(low, high);
 };
