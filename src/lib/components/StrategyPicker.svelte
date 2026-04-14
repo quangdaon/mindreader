@@ -29,7 +29,7 @@
     font-size: 1em;
     font-family: inherit;
     border: none;
-    background: #337;
+    background: var(--color-accent);
     color: #fff;
     border-radius: 0.25em;
   }

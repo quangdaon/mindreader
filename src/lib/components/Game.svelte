@@ -1,25 +1,30 @@
 <script lang="ts">
   import Button from "./Button.svelte";
 
+  const MIN_NUMBER = 1;
+  const MAX_NUMBER = 100;
+
   import { guessNumber } from "../guesser";
 
   let { started = $bindable() } = $props();
   let guess: number = $state(0);
   let tries: number = $state(0);
 
-  let low: number = $state(0);
-  let high: number = $state(100);
+  let low: number = $state(MIN_NUMBER);
+  let high: number = $state(MAX_NUMBER);
 
   let correct: boolean = $state(false);
+  let failed: boolean = $state(false);
 
   type GuessResult = "higher" | "lower" | "correct";
 
   const resetGame = () => {
     correct = false;
     started = false;
+    failed = false;
     tries = 0;
-    low = 0;
-    high = 100;
+    low = MIN_NUMBER;
+    high = MAX_NUMBER;
   };
 
   const startGame = () => {
@@ -31,12 +36,18 @@
 
   const makeGuess = (result: GuessResult) => {
     tries++;
+
     if (result === "higher") {
       low = guess + 1;
     } else if (result === "lower") {
       high = guess - 1;
     } else {
       correct = true;
+      return;
+    }
+
+    if (high < low || high < MIN_NUMBER || low > MAX_NUMBER) {
+      failed = true;
       return;
     }
 
@@ -47,12 +58,15 @@
 <main>
   <div class="content">
     {#if !started}
-      <h1>Guess a number between 1 and 100!</h1>
+      <h1>Guess a number between {MIN_NUMBER} and {MAX_NUMBER}!</h1>
       <Button onclick={startGame}>I'm Ready!</Button>
     {/if}
 
     {#if started}
-      {#if !correct}
+      {#if failed}
+        <h1>Game over! You're cheating.</h1>
+        <Button onclick={resetGame}>Play again</Button>
+      {:else if !correct}
         <h1>My guess is {guess}</h1>
         <Button onclick={() => makeGuess("higher")}>Higher</Button>
         <Button onclick={() => makeGuess("lower")}>Lower</Button>

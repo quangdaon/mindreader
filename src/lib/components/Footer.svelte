@@ -1,5 +1,8 @@
 <footer>
-  <p>A <a href="https://www.quangdao.com">Quangdao Nguyen</a> catastrophe. All rights reserved.</p>
+  <p>
+    A <a href="https://www.quangdao.com">Quangdao Nguyen</a> catastrophe. All rights reserved. |
+    <a href="https://github.com/quangdaon/mindreader">GitHub</a>
+  </p>
 </footer>
 
 <style>
