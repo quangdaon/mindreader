@@ -1,4 +1,4 @@
-import { selectedStrategy } from './stores';
+import { chosenStrategy } from './stores';
 
 export type GuessStrategy = {
   name: string;
@@ -24,7 +24,7 @@ export const strategies: Record<string, GuessStrategy> = {
 export type StrategyKey = keyof typeof strategies;
 
 export const guessNumber = (low: number, high: number): number => {
-  const strategyKey: StrategyKey = selectedStrategy.get();
+  const strategyKey: StrategyKey = chosenStrategy.get();
   const strategy = strategies[strategyKey];
   return strategy.guess(low, high);
 };
