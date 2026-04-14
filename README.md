@@ -1,5 +1,7 @@
 # Mind Reader
 
+https://lab.quangdao.com/mindreader
+
 I was bored and asked ChatGPT:
 
 > im bored gimme a programming project i can do in an hour
